@@ -1,0 +1,62 @@
+@page
+@model FileSearchEngine.Pages.ResultsModel
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="results-header">
+    <div class="results-logo">
+        <a href="/">FileSearch</a>
+    </div>
+    
+    <div class="results-search-box">
+        <form id="search-form" method="get" action="/results">
+            <div class="search-input-container">
+                <input 
+                    type="text" 
+                    name="q" 
+                    id="search-input" 
+                    autocomplete="off" 
+                    value="@Model.Query"
+                />
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="upload-link">
+        <button class="upload-button js-upload-trigger" data-page="results">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"></path>
+            </svg>
+            Upload
+        </button>
+    </div>
+</div>
+
+<div class="results-container">
+    <div id="results-count">About <span id="results-number">0</span> results</div>
+    
+    <div id="search-results">
+        <!-- Results will be populated via JavaScript -->
+    </div>
+    
+    <div class="pagination" id="pagination">
+        <!-- Pagination will be populated via JavaScript if needed -->
+    </div>
+</div>
+
+@await Html.PartialAsync("_UploadModal", new { PageId = "results" })
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSearchResults('@Model.Query');
+        });
+    </script>
+}

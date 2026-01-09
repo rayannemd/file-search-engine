@@ -1,0 +1,14 @@
+@model dynamic
+
+<div id="upload-modal-@Model.PageId" class="modal js-upload-modal" data-page="@Model.PageId">
+    <div class="modal-content">
+        <span class="close js-modal-close">&times;</span>
+        <h2>Upload Files</h2>
+        <p>Select files to upload and index</p>
+        <div class="drop-area js-drop-area" data-page="@Model.PageId">
+            <input type="file" class="js-file-input" data-page="@Model.PageId" multiple />
+        </div>
+        <div class="js-file-list" data-page="@Model.PageId"></div>
+        <button class="upload-submit-button js-upload-submit" data-page="@Model.PageId">Upload & Index</button>
+    </div>
+</div>
